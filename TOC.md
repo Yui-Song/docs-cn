@@ -3,12 +3,12 @@
 
 - 关于 TiDB
   - [TiDB 简介](/overview.md)
-  - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+  - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
   - [基本功能](/basic-features.md)
   - [实验特性](/experimental-features.md)
   - 性能测试报告
-    - [Sysbench 性能对比 - v5.3 对比 v5.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
-    - [TPC-C 性能对比 - v5.3 对比 v5.2](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+    - [Sysbench 性能对比 - v5.4 对比 v5.3](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+    - [TPC-C 性能对比 - v5.4 对比 v5.3](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
     - [TPC-H 100 性能对比 - v5.4 MPP 对比 Greenplum / Apache Spark](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
   - [与 MySQL 的兼容性](/mysql-compatibility.md)
   - [使用限制](/tidb-limitations.md)
@@ -56,10 +56,10 @@
 - 运维操作
   - 升级 TiDB 版本
     - [使用 TiUP 升级（推荐）](/upgrade-tidb-using-tiup.md)
-    - [使用 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/v1.1/upgrade-a-tidb-cluster)
+    - [使用 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
   - 扩缩容
     - [使用 TiUP（推荐）](/scale-tidb-using-tiup.md)
-    - [使用 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/v1.1/scale-a-tidb-cluster)
+    - [使用 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - 备份与恢复
     - 使用 BR 工具（推荐）
       - [BR 工具简介](/br/backup-and-restore-tool.md)
@@ -70,6 +70,7 @@
         - [在 Azure Blob Storage 备份恢复](/br/backup-and-restore-azblob.md)
       - BR 特性
         - [自动调节](/br/br-auto-tune.md)
+        - [批量建表](/br/br-batch-create-table.md)
       - [BR 常见问题](/br/backup-and-restore-faq.md)
   - [修改时区](/configure-time-zone.md)
   - [日常巡检](/daily-check.md)
@@ -84,6 +85,7 @@
   - [将 Grafana 监控数据导出成快照](/exporting-grafana-snapshots.md)
   - [TiDB 集群报警规则与处理方法](/alert-rules.md)
   - [TiFlash 报警规则与处理方法](/tiflash/tiflash-alert-rules.md)
+  - [自定义监控组件的配置](/tiup/customized-montior-in-tiup-environment.md)
 - 故障诊断
   - [定位慢查询](/identify-slow-queries.md)
   - [分析慢查询](/analyze-slow-queries.md)
@@ -100,6 +102,7 @@
   - [磁盘 I/O 过高](/troubleshoot-high-disk-io.md)
   - [锁冲突与 TTL 超时](/troubleshoot-lock-conflicts.md)
   - [TiFlash 常见问题](/tiflash/troubleshoot-tiflash.md)
+  - [数据索引不一致报错](/data-inconsistency-errors.md)
 - 性能调优
   - 系统调优
     - [操作系统性能参数调优](/tune-operating-system.md)
@@ -182,18 +185,100 @@
     - [TiUP 组件管理](/tiup/tiup-component-management.md)
     - [FAQ](/tiup/tiup-faq.md)
     - [故障排查](/tiup/tiup-troubleshooting-guide.md)
-    - [参考手册](/tiup/tiup-reference.md)
+    - TiUP 命令参考手册
+      - [命令概览](/tiup/tiup-reference.md)
+      - TiUP 命令
+        - [tiup clean](/tiup/tiup-command-clean.md)
+        - [tiup completion](/tiup/tiup-command-completion.md)
+        - [tiup env](/tiup/tiup-command-env.md)
+        - [tiup help](/tiup/tiup-command-help.md)
+        - [tiup install](/tiup/tiup-command-install.md)
+        - [tiup list](/tiup/tiup-command-list.md)
+        - tiup mirror
+          - [tiup mirror 概览](/tiup/tiup-command-mirror.md)
+          - [tiup mirror clone](/tiup/tiup-command-mirror-clone.md)
+          - [tiup mirror genkey](/tiup/tiup-command-mirror-genkey.md)
+          - [tiup mirror grant](/tiup/tiup-command-mirror-grant.md)
+          - [tiup mirror init](/tiup/tiup-command-mirror-init.md)
+          - [tiup mirror merge](/tiup/tiup-command-mirror-merge.md)
+          - [tiup mirror modify](/tiup/tiup-command-mirror-modify.md)
+          - [tiup mirror publish](/tiup/tiup-command-mirror-publish.md)
+          - [tiup mirror rotate](/tiup/tiup-command-mirror-rotate.md)
+          - [tiup mirror set](/tiup/tiup-command-mirror-set.md)
+          - [tiup mirror sign](/tiup/tiup-command-mirror-sign.md)
+        - [tiup status](/tiup/tiup-command-status.md)
+        - [tiup telemetry](/tiup/tiup-command-telemetry.md)
+        - [tiup uninstall](/tiup/tiup-command-uninstall.md)
+        - [tiup update](/tiup/tiup-command-update.md)
+      - TiUP Cluster 命令
+        - [TiUP Cluster 命令概览](/tiup/tiup-component-cluster.md)
+        - [tiup cluster audit](/tiup/tiup-component-cluster-audit.md)
+        - [tiup cluster check](/tiup/tiup-component-cluster-check.md)
+        - [tiup cluster clean](/tiup/tiup-component-cluster-clean.md)
+        - [tiup cluster deploy](/tiup/tiup-component-cluster-deploy.md)
+        - [tiup cluster destroy](/tiup/tiup-component-cluster-destroy.md)
+        - [tiup cluster disable](/tiup/tiup-component-cluster-disable.md)
+        - [tiup cluster display](/tiup/tiup-component-cluster-display.md)
+        - [tiup cluster edit-config](/tiup/tiup-component-cluster-edit-config.md)
+        - [tiup cluster enable](/tiup/tiup-component-cluster-enable.md)
+        - [tiup cluster help](/tiup/tiup-component-cluster-help.md)
+        - [tiup cluster import](/tiup/tiup-component-cluster-import.md)
+        - [tiup cluster list](/tiup/tiup-component-cluster-list.md)
+        - [tiup cluster patch](/tiup/tiup-component-cluster-patch.md)
+        - [tiup cluster prune](/tiup/tiup-component-cluster-prune.md)
+        - [tiup cluster reload](/tiup/tiup-component-cluster-reload.md)
+        - [tiup cluster rename](/tiup/tiup-component-cluster-rename.md)
+        - [tiup cluster replay](/tiup/tiup-component-cluster-replay.md)
+        - [tiup cluster restart](/tiup/tiup-component-cluster-restart.md)
+        - [tiup cluster scale-in](/tiup/tiup-component-cluster-scale-in.md)
+        - [tiup cluster scale-out](/tiup/tiup-component-cluster-scale-out.md)
+        - [tiup cluster start](/tiup/tiup-component-cluster-start.md)
+        - [tiup cluster stop](/tiup/tiup-component-cluster-stop.md)
+        - [tiup cluster template](/tiup/tiup-component-cluster-template.md)
+        - [tiup cluster upgrade](/tiup/tiup-component-cluster-upgrade.md)
+      - TiUP DM 命令
+        - [TiUP DM 命令概览](/tiup/tiup-component-dm.md)
+        - [tiup dm audit](/tiup/tiup-component-dm-audit.md)
+        - [tiup dm deploy](/tiup/tiup-component-dm-deploy.md)
+        - [tiup dm destroy](/tiup/tiup-component-dm-destroy.md)
+        - [tiup dm disable](/tiup/tiup-component-dm-disable.md)
+        - [tiup dm display](/tiup/tiup-component-dm-display.md)
+        - [tiup dm edit-config](/tiup/tiup-component-dm-edit-config.md)
+        - [tiup dm enable](/tiup/tiup-component-dm-enable.md)
+        - [tiup dm help](/tiup/tiup-component-dm-help.md)
+        - [tiup dm import](/tiup/tiup-component-dm-import.md)
+        - [tiup dm list](/tiup/tiup-component-dm-list.md)
+        - [tiup dm patch](/tiup/tiup-component-dm-patch.md)
+        - [tiup dm prune](/tiup/tiup-component-dm-prune.md)
+        - [tiup dm reload](/tiup/tiup-component-dm-reload.md)
+        - [tiup dm replay](/tiup/tiup-component-dm-replay.md)
+        - [tiup dm restart](/tiup/tiup-component-dm-restart.md)
+        - [tiup dm scale-in](/tiup/tiup-component-dm-scale-in.md)
+        - [tiup dm scale-out](/tiup/tiup-component-dm-scale-out.md)
+        - [tiup dm start](/tiup/tiup-component-dm-start.md)
+        - [tiup dm stop](/tiup/tiup-component-dm-stop.md)
+        - [tiup dm template](/tiup/tiup-component-dm-template.md)
+        - [tiup dm upgrade](/tiup/tiup-component-dm-upgrade.md)
     - [TiDB 集群拓扑文件配置](/tiup/tiup-cluster-topology-reference.md)
+    - [DM 集群拓扑文件配置](/tiup/tiup-dm-topology-reference.md)
     - [TiUP 镜像参考指南](/tiup/tiup-mirror-reference.md)
     - TiUP 组件文档
       - [tiup-playground 运行本地测试集群](/tiup/tiup-playground.md)
       - [tiup-cluster 部署运维生产集群](/tiup/tiup-cluster.md)
       - [tiup-mirror 定制离线镜像](/tiup/tiup-mirror.md)
       - [tiup-bench 进行 TPCC/TPCH 压力测试](/tiup/tiup-bench.md)
+  - PingCAP Clinic 诊断服务 (Beta)
+    - [概述](/clinic/clinic-introduction.md)
+    - [使用 PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [数据采集说明](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - [Dumpling](/dumpling-overview.md)
   - TiDB Lightning
     - [概述](/tidb-lightning/tidb-lightning-overview.md)
+    - 前置需求
+      - [前置检查](/tidb-lightning/tidb-lightning-prechecks.md)
+      - [权限要求](/tidb-lightning/tidb-lightning-requirements.md)
+      - [空间估算](/tidb-lightning/tidb-lightning-requirements.md#下游数据库所需空间)
     - 主要功能
       - [断点续传](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [表库过滤](/table-filter.md)
@@ -203,90 +288,89 @@
       - [错误处理功能](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web 界面](/tidb-lightning/tidb-lightning-web-interface.md)
     - [快速上手教程](/get-started-with-tidb-lightning.md)
-    - [前置检查](/tidb-lightning/tidb-lightning-prechecks.md)
     - [部署执行](/tidb-lightning/deploy-tidb-lightning.md)
     - [参数说明](/tidb-lightning/tidb-lightning-configuration.md)
     - [监控告警](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [术语表](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
-    - 关于 TiDB Data Migration
-      - [TiDB Data Migration 简介](/dm/dm-overview.md)
-      - 基本功能
+    - [关于 Data Migration](/dm/dm-overview.md)
+    - [快速开始](/dm/quick-start-with-dm.md)
+    - 部署 DM 集群
+      - [软硬件要求](/dm/dm-hardware-and-software-requirements.md)
+      - [使用 TiUP 联网部署（推荐）](/dm/deploy-a-dm-cluster-using-tiup.md)
+      - [使用 TiUP 离线部署](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
+      - [使用 Binary 部署](/dm/deploy-a-dm-cluster-using-binary.md)
+      - [在 Kubernetes 环境中部署](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/deploy-tidb-dm)
+    - 入门指南
+        - [数据源操作](/dm/dm-manage-source.md)
+        - [任务配置向导](/dm/dm-task-configuration-guide.md)
         - [Table routing](/dm/dm-key-features.md#table-routing)
         - [Block & Allow Lists](/dm/dm-key-features.md#block--allow-table-lists)
-        - [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter)
-      - 高级功能
-        - 分库分表合并迁移
-          - [概述](/dm/feature-shard-merge.md)
-          - [悲观模式](/dm/feature-shard-merge-pessimistic.md)
-          - [乐观模式](/dm/feature-shard-merge-optimistic.md)
-        - [迁移使用 GH-ost/PT-osc 的源数据库](/dm/feature-online-ddl.md)
+        - [过滤 binlog 事件](/dm/dm-key-features.md#binlog-event-filter)
         - [通过 SQL 表达式过滤 DML](/dm/feature-expression-filter.md)
-      - [DM 架构](/dm/dm-arch.md)
-      - [性能数据](/dm/dm-benchmark-v5.3.0.md)
-    - 快速上手
-      - [快速上手试用](/dm/quick-start-with-dm.md)
-      - [使用 TiUP 部署 DM 集群](/dm/deploy-a-dm-cluster-using-tiup.md)
-      - [创建数据源](/dm/quick-start-create-source.md)
-    - [使用场景](/dm/quick-create-migration-task.md)
-    - 部署使用
-      - [软硬件要求](/dm/dm-hardware-and-software-requirements.md)
-      - 部署 DM 集群
-        - [使用 TiUP（推荐）](/dm/deploy-a-dm-cluster-using-tiup.md)
-        - [使用 TiUP 离线镜像](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
-        - [使用 Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-        - [使用 Kubernetes](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/deploy-tidb-dm)
-      - [使用 DM 迁移数据](/dm/migrate-data-using-dm.md)
-      - [测试 DM 性能](/dm/dm-performance-test.md)
-    - 运维操作
-      - 集群运维工具
+        - 迁移任务操作
+            - [任务前置检查](/dm/dm-precheck.md)
+            - [创建任务](/dm/dm-create-task.md)
+            - [查询状态](/dm/dm-query-status.md)
+            - [暂停任务](/dm/dm-pause-task.md)
+            - [恢复任务](/dm/dm-resume-task.md)
+            - [停止任务](/dm/dm-stop-task.md)
+        - [使用 WebUI 管理迁移任务](/dm/dm-webui-guide.md)
+    - 进阶教程
+      - 分库分表合并迁移
+        - [概述](/dm/feature-shard-merge.md)
+        - [悲观模式](/dm/feature-shard-merge-pessimistic.md)
+        - [乐观模式](/dm/feature-shard-merge-optimistic.md)
+        - [手动处理 Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
+      - [迁移使用 GH-ost/PT-osc 的数据源](/dm/feature-online-ddl.md)
+      - [上下游列数量不一致的迁移](/migrate-with-more-columns-downstream.md)
+    - 运维管理
+      - 集群版本升级
         - [使用 TiUP 运维集群（推荐）](/dm/maintain-dm-using-tiup.md)
-        - [使用 dmctl 运维集群](/dm/dmctl-introduction.md)
-        - [使用 OpenAPI 运维集群](/dm/dm-open-api.md)
-      - 升级版本
         - [1.0.x 到 2.0+ 手动升级](/dm/manually-upgrade-dm-1.0-to-2.0.md)
-      - [管理数据源](/dm/dm-manage-source.md)
-      - 管理迁移任务
-        - [任务配置向导](/dm/dm-task-configuration-guide.md)
-        - [任务前置检查](/dm/dm-precheck.md)
-        - [创建任务](/dm/dm-create-task.md)
-        - [查询状态](/dm/dm-query-status.md)
-        - [暂停任务](/dm/dm-pause-task.md)
-        - [恢复任务](/dm/dm-resume-task.md)
-        - [停止任务](/dm/dm-stop-task.md)
-        - [导出和导入集群的数据源和任务配置](/dm/dm-export-import-config.md)
+      - 集群运维工具
+        - [使用 dmctl 管理迁移任务](/dm/dmctl-introduction.md)
+      - 性能调优
+        - [性能数据](/dm/dm-benchmark-v5.4.0.md)
+        - [配置调优](/dm/dm-tune-configuration.md)
+        - [如何进行压力测试](/dm/dm-performance-test.md)
+        - [性能问题及处理方法](/dm/dm-handle-performance-issues.md)
+      - 数据源管理
+        - [变更同步的数据源地址](/dm/usage-scenario-master-slave-switch.md)
+      - 任务管理
         - [处理出错的 DDL 语句](/dm/handle-failed-ddl-statements.md)
-      - [手动处理 Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
-      - [变更同步的 MySQL 实例](/dm/usage-scenario-master-slave-switch.md)
-      - [管理迁移表的表结构](/dm/dm-manage-schema.md)
+        - [管理迁移表的表结构](/dm/dm-manage-schema.md)
+      - [导出和导入集群的数据源和任务配置](/dm/dm-export-import-config.md)
       - [处理告警](/dm/dm-handle-alerts.md)
       - [日常巡检](/dm/dm-daily-check.md)
-    - 故障处理
-      - [故障及处理方法](/dm/dm-error-handling.md)
-      - [性能问题及处理方法](/dm/dm-handle-performance-issues.md)
-    - 性能调优
-      - [配置调优](/dm/dm-tune-configuration.md)
-    - 参考指南
-      - 架构
-        - [DM 架构简介](/dm/dm-arch.md)
-        - [DM-worker 简介](/dm/dm-worker-intro.md)
-      - [DM 命令行参数](/dm/dm-command-line-flags.md)
-      - 配置
-        - [概述](/dm/dm-config-overview.md)
-        - [DM-master 配置](/dm/dm-master-configuration-file.md)
-        - [DM-worker 配置](/dm/dm-worker-configuration-file.md)
-        - [上游数据库配置](/dm/dm-source-configuration-file.md)
-        - [数据迁移任务配置向导](/dm/dm-task-configuration-guide.md)
-      - 安全
-        - [为 DM 的连接开启加密传输](/dm/dm-enable-tls.md)
-        - [生成自签名证书](/dm/dm-generate-self-signed-certificates.md)
-      - [监控指标](/dm/monitor-a-dm-cluster.md)
-      - [告警信息](/dm/dm-alert-rules.md)
-      - [错误码](/dm/dm-error-handling.md#常见故障处理方法)
-    - [常见问题](/dm/dm-faq.md)
-    - [术语表](/dm/dm-glossary.md)
-    - [版本发布历史](/dm/dm-release-notes.md)
+     - 参考手册
+        - 架构
+          - [DM 架构简介](/dm/dm-arch.md)
+          - [DM-worker 说明](/dm/dm-worker-intro.md)
+        - 命令行
+          - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
+        - 配置文件
+          - [概述](/dm/dm-config-overview.md)
+          - [数据源配置](/dm/dm-source-configuration-file.md)
+          - [迁移任务配置](/dm/task-configuration-file-full.md)
+          - [DM-master 配置](/dm/dm-master-configuration-file.md)
+          - [DM-worker 配置](/dm/dm-worker-configuration-file.md)
+        - [OpenAPI](/dm/dm-open-api.md)
+        - 安全
+          - [为 DM 的连接开启加密传输](/dm/dm-enable-tls.md)
+          - [生成自签名证书](/dm/dm-generate-self-signed-certificates.md)
+        - 监控告警 
+          - [监控指标](/dm/monitor-a-dm-cluster.md)
+          - [告警信息](/dm/dm-alert-rules.md)
+        - [错误码](/dm/dm-error-handling.md#常见故障处理方法)
+        - [术语表](/dm/dm-glossary.md)
+      - 使用示例
+        - [使用 DM 迁移数据](/dm/migrate-data-using-dm.md)
+      - 异常解决
+        - [常见问题](/dm/dm-faq.md)
+        - [错误处理及恢复](/dm/dm-error-handling.md)
+      - [版本发布历史](/dm/dm-release-notes.md)
   - Backup & Restore (BR)
     - [BR 工具简介](/br/backup-and-restore-tool.md)
     - [使用 BR 命令行备份恢复](/br/use-br-command-line-tool.md)
@@ -294,6 +378,7 @@
     - [外部存储](/br/backup-and-restore-storages.md)
     - BR 特性
       - [自动调节](/br/br-auto-tune.md)
+      - [批量建表](/br/br-batch-create-table.md)
     - [BR 常见问题](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [概述](/tidb-binlog/tidb-binlog-overview.md)
@@ -578,7 +663,7 @@
         - [`METRICS_SUMMARY`](/information-schema/information-schema-metrics-summary.md)
         - [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)
         - [`PARTITIONS`](/information-schema/information-schema-partitions.md)
-        - [`PLACEMENT_RULES`](/information-schema/information-schema-placement-rules.md)
+        - [`PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)
         - [`PROCESSLIST`](/information-schema/information-schema-processlist.md)
         - [`REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
         - [`SCHEMATA`](/information-schema/information-schema-schemata.md)
@@ -663,16 +748,21 @@
 - 常见问题解答 (FAQ)
   - [产品 FAQ](/faq/tidb-faq.md)
   - [SQL FAQ](/faq/sql-faq.md)
-  - [部署运维 FAQ](/faq/deploy-and-maintain-faq.md)
+  - [安装部署 FAQ](/faq/deploy-and-maintain-faq.md)
+  - [迁移 FAQ](/faq/migration-tidb-faq.md)
   - [升级 FAQ](/faq/upgrade-faq.md)
+  - [监控 FAQ](/faq/monitor-faq.md)
+  - [集群管理 FAQ](/faq/manage-cluster-faq.md)
   - [高可用 FAQ](/faq/high-availability-faq.md)
   - [高可靠 FAQ](/faq/high-reliability-faq.md)
-  - [迁移 FAQ](/faq/migration-tidb-faq.md)
 - [术语表](/glossary.md)
 - 版本发布历史
   - [发布版本汇总](/releases/release-notes.md)
   - [版本发布时间线](/releases/release-timeline.md)
+  - v5.4
+    - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
   - v5.2
     - [5.2.3](/releases/release-5.2.3.md)
@@ -680,6 +770,7 @@
     - [5.2.1](/releases/release-5.2.1.md)
     - [5.2.0](/releases/release-5.2.0.md)
   - v5.1
+    - [5.1.4](/releases/release-5.1.4.md)
     - [5.1.3](/releases/release-5.1.3.md)
     - [5.1.2](/releases/release-5.1.2.md)
     - [5.1.1](/releases/release-5.1.1.md)

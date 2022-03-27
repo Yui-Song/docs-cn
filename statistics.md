@@ -5,7 +5,7 @@ aliases: ['/docs-cn/dev/statistics/','/docs-cn/dev/reference/performance/statist
 
 # 统计信息简介
 
-TiDB 使用统计信息来决定[索引的选择](/choose-index.md)。变量 `tidb_analyze_version` 用于控制所收集到的统计信息。目前 TiDB 中支持两种统计信息：`tidb_analyze_version = 1` 以及 `tidb_analyze_version = 2`。在 v5.1.0 以前的版本中，该变量的默认值为 `1`。在 v5.1、v5.2、v5.3 中，该变量的默认值为 `2`，作为实验特性启用。
+TiDB 使用统计信息来决定[索引的选择](/choose-index.md)。变量 `tidb_analyze_version` 用于控制所收集到的统计信息。目前 TiDB 中支持两种统计信息：`tidb_analyze_version = 1` 以及 `tidb_analyze_version = 2`。在 v5.3.0 及之后的版本中，该变量的默认值为 `2`，作为实验特性启用。如果从 v5.3.0 之前版本的集群升级至 v5.3.0 及之后的版本，`tidb_analyze_version` 的默认值不发生变化。
 
 > **注意：**
 >
@@ -190,7 +190,7 @@ SHOW COLUMN_STATS_USAGE [ShowLikeOrWhere];
 
 `SHOW COLUMN_STATS_USAGE` 会输出 6 列，具体如下：
 
-| 语法元素 | 说明            |
+| 列名 | 说明            |
 | -------- | ------------- |
 | Db_name  |  数据库名    |
 | Table_name | 表名 |
@@ -326,7 +326,33 @@ ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexName
 
 当某个表 `tbl` 的修改行数与总行数的比值大于 `tidb_auto_analyze_ratio`，并且当前时间在 `tidb_auto_analyze_start_time` 和 `tidb_auto_analyze_end_time` 之间时，TiDB 会在后台执行 `ANALYZE TABLE tbl` 语句自动更新这个表的统计信息。
 
-在 v5.0 版本之前，执行查询语句时，TiDB 会以 [`feedback-probability`](/tidb-configuration-file.md#feedback-probability) 的概率收集反馈信息，并将其用于更新直方图和 Count-Min Sketch。**从 v5.0 版本起，该功能默认关闭，暂不建议开启此功能。**
+在 TiDB v5.0 之前，执行查询语句时，TiDB 会以 [`feedback-probability`](/tidb-configuration-file.md#feedback-probability) 的概率收集反馈信息，并将其用于更新直方图和 Count-Min Sketch。**从 v5.0 起，该功能默认关闭，暂不建议开启此功能。**
+
+从 TiDB v6.0 起，TiDB 支持通过 `KILL` 语句终止正在后台运行的 `ANALYZE` 任务。如果发现正在后台运行的 `ANALYZE` 任务消耗大量资源影响业务，你可以通过以下步骤终止该 `ANALYZE` 任务：
+
+1. 执行以下 SQL 语句获得正在执行后台 `ANALYZE` 任务的 TiDB 实例地址和任务 `ID`：
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    SELECT ci.instance as instance, cp.id as id FROM information_schema.cluster_info ci, information_schema.cluster_processlist cp WHERE ci.status_address = cp.instance and ci.type = 'tidb' and cp.info like 'analyze table %' and cp.user = '' and cp.host = '';
+    ```
+
+    如果输出结果为空，说明后台没有正在执行的 `ANALYZE` 任务。
+
+2. 使用客户端连接到执行后台 `ANALYZE` 任务的 TiDB 实例，然后执行以下 `KILL` 语句：
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    KILL TIDB ${id};
+    ```
+
+    `${id}` 为上一步中查询得到的后台 `ANALYZE` 任务的 `ID`。
+
+    > **注意：**
+    >
+    > 只有当使用客户端连接到执行后台 `ANALYZE` 任务的 TiDB 实例时，执行 `KILL` 语句才能终止后台的 `ANALYZE` 任务。如果使用客户端连接到其他 TiDB 实例，或者客户端和 TiDB 中间有代理，`KILL` 语句不能终止后台的 `ANALYZE` 任务。更多信息，请参考 [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)。
 
 ### 控制 ANALYZE 并发度
 
@@ -391,7 +417,7 @@ SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 目前 `SHOW ANALYZE STATUS` 会输出 7 列，具体如下：
 
-| 语法元素 | 说明            |
+| 列名 | 说明            |
 | -------- | ------------- |
 | table_schema  |  数据库名    |
 | table_name | 表名 |
@@ -421,7 +447,7 @@ SHOW STATS_META [ShowLikeOrWhere];
 
 目前 `SHOW STATS_META` 会输出 6 列，具体如下：
 
-| 语法元素 | 说明            |
+| 列名 | 说明            |
 | -------- | ------------- |
 | db_name  |  数据库名    |
 | table_name | 表名 |
@@ -448,7 +474,7 @@ SHOW STATS_META [ShowLikeOrWhere];
 
 目前，`SHOW STATS_HEALTHY` 会输出 4 列，具体如下：
 
-| 语法元素 | 说明            |
+| 列名 | 说明            |
 | :-------- | :------------- |
 | db_name  |  数据库名    |
 | table_name | 表名 |
@@ -471,7 +497,7 @@ SHOW STATS_HISTOGRAMS [ShowLikeOrWhere];
 
 目前 `SHOW STATS_HISTOGRAMS` 会输出 10 列，具体如下：
 
-| 语法元素 | 说明            |
+| 列名 | 说明            |
 | -------- | ------------- |
 | db_name  |  数据库名    |
 | table_name | 表名 |
@@ -506,7 +532,7 @@ SHOW STATS_BUCKETS [ShowLikeOrWhere];
 
 目前 `SHOW STATS_BUCKETS` 会输出 11 列，具体如下：
 
-| 语法元素 | 说明            |
+| 列名 | 说明            |
 | -------- | ------------- |
 | db_name  |  数据库名    |
 | table_name | 表名 |
@@ -534,7 +560,7 @@ SHOW STATS_TOPN [ShowLikeOrWhere];
 
 目前 `SHOW STATS_TOPN` 会输出 7 列，具体如下：
 
-| 语法元素 | 说明            |
+| 列名 | 说明            |
 | -------- | ------------- |
 | db_name  |  数据库名    |
 | table_name | 表名 |
