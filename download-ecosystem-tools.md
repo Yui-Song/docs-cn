@@ -20,13 +20,12 @@ TiDB 工具包中包含了一些常用的 TiDB 工具，例如数据导出工具
 
 ## 下载步骤
 
-1. 访问 [TiDB 社区版](https://pingcap.com/zh/product-community/) 页面。
-2. 点击 **同意 PingCAP 社区软件许可协议**。
-3. 找到 **TiDB-community-toolkit 软件包**，点击**立即下载**。
+1. 访问 [TiDB 社区版](https://pingcap.com/zh/product-community/)页面。
+2. 找到 **TiDB-community-toolkit 软件包**，点击**立即下载**。
 
 > **注意：**
 >
-> - 点击**立即下载**后，默认下载当前 TiDB 的最新发布版本。如需下载历史版本，请在 [TiDB 社区版](https://pingcap.com/zh/product-community/) 页面底部查看历史版本下载信息。
+> - 点击**立即下载**后，默认下载当前 TiDB 的最新发布版本。如需下载历史版本，请在 [TiDB 社区版](https://pingcap.com/zh/product-community/)页面底部查看历史版本下载信息。
 > - 如果需要在 Kubernetes 上部署运维 TiDB，无需下载 TiDB-community-toolkit 软件包，请参考[离线安装 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tidb-operator#离线安装-tidb-operator)。
 
 ## TiDB 工具包说明
@@ -41,7 +40,7 @@ TiDB 工具包中包含了一些常用的 TiDB 工具，例如数据导出工具
 | [TiDB DM (Data Migration)](/dm/dm-overview.md)  | `dm-worker-{version}-linux-amd64.tar.gz` <br/>`dm-master-{version}-linux-amd64.tar.gz` <br/>`dmctl-{version}-linux-amd64.tar.gz`  |
 | [TiCDC](/ticdc/ticdc-overview.md)  | `cdc-{version}-linux-amd64.tar.gz`  |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)  | `pump-{version}-linux-amd64.tar.gz` <br/>`drainer-{version}-linux-amd64.tar.gz` <br/>`binlogctl` <br/>`reparo`  |
-| [Backup & Restore (BR)](/br/backup-and-restore-tool.md)  | `br-{version}-linux-amd64.tar.gz`  |
+| [Backup & Restore (BR)](/br/backup-and-restore-overview.md)  | `br-{version}-linux-amd64.tar.gz`  |
 | [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | `sync_diff_inspector`  |
 | [TiSpark](/tispark-overview.md)  | `tispark-{tispark-version}-any-any.tar.gz` <br/>`spark-{spark-version}-any-any.tar.gz`  |
 | [PD Control](/pd-control.md)  | `pd-recover-{version}-linux-amd64.tar` |
