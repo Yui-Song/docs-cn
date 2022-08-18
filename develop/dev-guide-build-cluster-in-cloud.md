@@ -36,7 +36,7 @@ aliases: ['/zh/tidb/dev/build-cluster-in-cloud']
 
     <div label="macOS">
 
-    如果你没有安装 Homebrew，请移步 [Homebrew 官网](https://brew.sh/index_zh-cn)进行安装。
+    对于 macOS 操作系统，如果你没有安装 Homebrew，请参考 [Homebrew 官网](https://brew.sh/index_zh-cn)进行安装。
 
     {{< copyable "shell-regular" >}}
 
@@ -85,7 +85,7 @@ aliases: ['/zh/tidb/dev/build-cluster-in-cloud']
 
     <div label="Linux">
 
-    以 CentOS 7 为例：
+    对于 Linux 操作系统，下面以 CentOS 7 为例：
 
     {{< copyable "shell-root" >}}
 
@@ -137,13 +137,13 @@ aliases: ['/zh/tidb/dev/build-cluster-in-cloud']
 
     <div label="本地默认集群">
 
-    无需更改。
+    本地默认集群无需更改连接参数。
 
     </div>
 
     <div label="非本地默认集群、TiDB Cloud 或其他远程集群">
 
-    更改 `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java` 内关于 Host、Port、User、Password 的参数：
+    对于非本地默认集群、TiDB Cloud 或其他远程集群，需要更改 `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java` 内关于 Host、Port、User、Password 的参数：
 
     {{< copyable "" >}}
 
@@ -160,7 +160,7 @@ aliases: ['/zh/tidb/dev/build-cluster-in-cloud']
     {{< copyable "shell-regular" >}}
 
     ```shell
-    mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
+    mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
     ```
 
     那么此处应将参数更改为：
@@ -168,7 +168,7 @@ aliases: ['/zh/tidb/dev/build-cluster-in-cloud']
     {{< copyable "" >}}
 
     ```java
-    mysqlDataSource.setServerName("tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com");
+    mysqlDataSource.setServerName("xxx.tidbcloud.com");
     mysqlDataSource.setPortNumber(4000);
     mysqlDataSource.setDatabaseName("test");
     mysqlDataSource.setUser("root");
