@@ -78,12 +78,12 @@ Create Table: CREATE TABLE `t1` (
 
 ## MySQL 兼容性
 
-`RENAME INDEX` 语句与 MySQL 完全兼容。如发现任何兼容性差异，请在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues/new/choose)。
+`RENAME INDEX` 语句与 MySQL 完全兼容。如发现任何兼容性差异，请尝试 [TiDB 支持资源](/support.md)。
 
 ## 另请参阅
 
 * [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
 * [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 * [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [SHOW INDEX](/sql-statements/sql-statement-show-index.md)
+* [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md)
 * [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)

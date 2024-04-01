@@ -17,9 +17,9 @@ tiup playground ${version} [flags]
 
 如果直接执行 `tiup playground` 命令，则 TiUP playground 会使用本地安装的 TiDB/TiKV/PD 组件或者安装这些组件的稳定版本，来启动一个由 1 个 TiKV、1 个 TiDB、1 个 PD 和 1 个 TiFlash 实例构成的集群。该命令实际做了以下事情：
 
-- 因为该命令没有指定 playground 的版本，TiUP 会先查找已安装的 playground 的最新版本，假设已安装的 playground 最新版为 v1.10.3，则该命令相当于 tiup playground:v1.10.3
+- 因为该命令没有指定 playground 的版本，TiUP 会先查找已安装的 playground 的最新版本，假设已安装的 playground 最新版为 v1.12.3，则该命令相当于 tiup playground:v1.12.3
 - 如果 playground 从未安装过任何版本的 TiDB/TiKV/PD 组件，TiUP 会先安装这些组件的最新稳定版，然后再启动运行这些组件的实例
-- 因为该命令没有指定 TiDB/PD/TiKV 各组件的版本，默认情况下，它会使用各组件的最新发布版本，假设当前为 v6.2.0，则该命令相当于 tiup playground:1.10.3 v6.2.0
+- 因为该命令没有指定 TiDB/PD/TiKV 各组件的版本，默认情况下，它会使用各组件的最新发布版本，假设当前为 v8.0.0，则该命令相当于 tiup playground:1.12.3 v8.0.0
 - 因为该命令也没有指定各组件的个数，默认情况下，它会启动由 1 个 TiDB、1 个 TiKV、1 个 PD 和 1 个 TiFlash 实例构成的最小化集群
 - 在依次启动完各个 TiDB 组件后，playground 会提醒集群启动成功，并告诉你一些有用的信息，譬如如何通过 MySQL 客户端连接集群、如何访问 [TiDB Dashboard](/dashboard/dashboard-intro.md) 等
 
@@ -57,6 +57,12 @@ Flags:
       --tiflash.binpath string   指定 TiFlash 的二进制文件位置（开发调试用，可忽略）
       --tiflash.config string    指定 TiFlash 的配置文件（开发调试用，可忽略）
       --tiflash.timeout int      指定 TiFlash 最长等待超时时间，单位为秒，若配置为 0，则永不超时。
+      --tiproxy int              设置集群中 TiProxy 节点的数量
+      --tiproxy.binpath string   指定 TiProxy 的二进制文件位置
+      --tiproxy.config string    指定 TiProxy 的配置文件
+      --tiproxy.host host        Playground 的 TiProxy host。如果没有提供，TiProxy 会使用 host 参数作为它的 host
+      --tiproxy.port int         Playground 的 TiProxy 端口。如果没有提供，TiProxy 会使用 6000 作为它的端口
+      --tiproxy.timeout int      TiProxy 最长等待超时时间，单位为秒，若配置为 0，则永不超时（默认为 60）。
   -v, --version                  显示 playground 的版本号
       --without-monitor          设置不使用 Prometheus 和 Grafana 的监控功能。若不添加此参数，则默认开启监控功能。
 
@@ -122,6 +128,16 @@ tiup playground --db.binpath /xx/tidb-server
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
+### 启动集群时指定 tag
+
+Playground 集群在命令行退出时，会默认清空所有的集群数据。如果想要启动一个数据不被自动删除的 Playground 集群，需要在启动时指定集群 tag，指定后可以在 `~/.tiup/data` 路径下找到该集群的数据。在集群启动时指定 tag 的方法如下：
+
+```shell
+tiup playground --tag <tagname>
+```
+
+以这种方式启动的集群，在集群关闭以后，数据文件会保留。下一次可以继续使用该 tag 启动集群，从而使用从上一次集群关闭时的数据。
+
 ## 快速连接到由 playground 启动的 TiDB 集群
 
 TiUP 提供了 `client` 组件，用于自动寻找并连接 playground 在本地启动的 TiDB 集群，使用方式为：
@@ -174,3 +190,16 @@ tiup playground scale-out --db 2
 ```shell
 tiup playground scale-in --pid 86526
 ```
+
+## 部署 PD 微服务
+
+从 v8.0.0 起，PD 支持[微服务模式](/pd-microservices.md)（实验特性）。你可以通过 TiUP Playground 为集群部署 `tso` 微服务和 `scheduling` 微服务。
+
+```shell
+tiup playground v8.0.0 --pd.mode ms --pd.api 3 --pd.tso 2 --pd.scheduling 3
+```
+
+- `--pd.mode`：当指定 `--pd.mode` 为 `ms` 时，代表启用 PD 微服务模式。
+- `--pd.api num`：指定 PD 微服务 API 的数量，需要大于等于 `1`。
+- `--pd.tso num`：指定要部署的 `tso` 微服务的实例数量。
+- `--pd.scheduling num`：指定要部署的 `scheduling` 微服务的实例数量。

@@ -150,7 +150,7 @@ alertmanager_servers:
 >
 >     - TiUP 节点可连通所有 DM-worker 节点的 `port`（默认为 `8262`）。
 
-更多 `master_servers.host.config` 参数说明，请参考 [master parameter](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)；更多 `worker_servers.host.config` 参数说明，请参考 [worker parameter](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)。
+更多 `master_servers.host.config` 参数说明，请参考 [master parameter](https://github.com/pingcap/tiflow/blob/master/dm/master/dm-master.toml)；更多 `worker_servers.host.config` 参数说明，请参考 [worker parameter](https://github.com/pingcap/tiflow/blob/master/dm/worker/dm-worker.toml)。
 
 ## 第 3 步：执行部署命令
 
@@ -233,4 +233,4 @@ tiup dm display dm-test
 
 dmctl 是用来控制集群运行命令的工具，推荐[通过 TiUP 获取该工具](/dm/maintain-dm-using-tiup.md#集群控制工具-dmctl)。
 
-dmctl 支持命令模式与交互模式，具体请见[使用 dmctl 运维集群](/dm/dmctl-introduction.md#使用-dmctl-运维集群)。
+dmctl 支持命令模式与交互模式，具体请见[使用 dmctl 运维集群](/dm/dmctl-introduction.md)。

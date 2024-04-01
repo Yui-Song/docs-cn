@@ -9,23 +9,23 @@ hide_leftNav: true
 
 <DocHomeSection label="TiDB" anchor="tidb" id="tidb">
 
-TiDB 是 PingCAP 公司自主设计、研发的开源分布式关系型数据库，是一款同时支持在线事务处理与在线分析处理 (Hybrid Transactional and Analytical Processing, HTAP) 的融合型分布式数据库产品，具备水平扩容或者缩容、金融级高可用、实时 HTAP、云原生的分布式数据库、兼容 MySQL 5.7 协议和 MySQL 生态等重要特性，支持在本地和云上部署。
+TiDB 是 PingCAP 公司自主设计、研发的开源分布式关系型数据库，是一款同时支持在线事务处理与在线分析处理 (Hybrid Transactional and Analytical Processing, HTAP) 的融合型分布式数据库产品，具备水平扩容或者缩容、金融级高可用、实时 HTAP、云原生的分布式数据库、兼容 MySQL 协议和 MySQL 生态等重要特性，支持在本地和云上部署。
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="/tidb/stable" icon="doc1" label="TiDB 文档">
+<DocHomeCard href="/zh/tidb/stable" icon="doc1" label="TiDB 文档">
 
 查看 TiDB 产品的全部文档
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidb/stable/quick-start-with-tidb" icon="doc5" label="快速上手 TiDB">
+<DocHomeCard href="/zh/tidb/stable/quick-start-with-tidb" icon="doc5" label="快速上手 TiDB">
 
 快速了解和使用 TiDB
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="部署本地 TiDB 集群">
+<DocHomeCard href="/zh/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="部署本地 TiDB 集群">
 
 在生产环境中部署本地 TiDB 集群
 

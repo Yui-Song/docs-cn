@@ -36,7 +36,7 @@ tiup playground
 
 > **注意：**
 >
-> `tiup playground` 命令仅适用于快速上手体验，不适用于生产环境。
+> `tiup playground` 命令仅适用于快速上手体验，不适用于生产环境，也不适用于全面的功能测试和稳定性测试。
 
 ### 第 2 步：准备试用数据
 
@@ -88,7 +88,7 @@ tiup playground
     | test.lineitem |        6001215 | 0.7756G   | 0.0894G    | 0.8651G |
     +---------------+----------------+-----------+------------+---------+
     8 rows in set (0.06 sec)
-     ```
+    ```
 
     这是一个商业订购系统的数据库。其中，`test.nation` 表是国家信息、`test.region` 表是地区信息、`test.part` 表是零件信息、`test.supplier` 表是供货商信息、`test.partsupp` 表是供货商的零件信息、`test.customer` 表是消费者信息、`test.orders` 表是订单信息、`test.lineitem` 表是在线商品的信息。
 
@@ -99,6 +99,7 @@ tiup playground
 {{< copyable "sql" >}}
 
 ```sql
+USE test;
 SELECT
     l_orderkey,
     SUM(
@@ -152,8 +153,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 以上查询结果中：
 
-- `AVAILABLE` 字段表示该表的 TiFlash 副本是否可用。1 代表可用，0 代表不可用。副本状态变为可用之后就不再改变，如果通过 DDL 命令修改副本数则会重新计算同步进度。
-- `PROGRESS` 字段代表同步进度，在 0.0~1.0 之间，1 代表至少 1 个副本已经完成同步。
+- `AVAILABLE` 字段表示该表的 TiFlash 副本是否可用。1 代表可用，0 代表不可用。副本状态变为可用之后就不再改变。
+- `PROGRESS` 字段代表同步进度，在 0.0~1.0 之间，1 代表 TiFlash 副本已经完成同步。
 
 ### 第 5 步：使用 HTAP 更快地分析数据
 
@@ -164,7 +165,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 {{< copyable "sql" >}}
 
 ```sql
-explain analyze SELECT
+USE test;
+EXPLAIN ANALYZE SELECT
     l_orderkey,
     SUM(
         l_extendedprice * (1 - l_discount)

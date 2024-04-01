@@ -8,6 +8,10 @@ title: TiDB 5.3.2 Release Notes
 
 TiDB 版本：5.3.2
 
+> **警告：**
+>
+> 不建议使用 v5.3.2，因为该版本已知存在 bug，详情参见 [#12934](https://github.com/tikv/tikv/issues/12934)。该 bug 已在 v5.3.3 中修复，建议升级至 [v5.3.3](/releases/release-5.3.3.md)。
+
 ## 兼容性变更
 
 + TiDB
@@ -154,6 +158,6 @@ TiDB 版本：5.3.2
 
     + TiDB Lightning
 
-        - 修复由 `auto_increment` 列的数据越界导致 local 模式导入失败的问题 [#29737](https://github.com/pingcap/tidb/issues/27937)
+        - 修复由 `auto_increment` 列的数据越界导致 local 模式导入失败的问题 [#27937](https://github.com/pingcap/tidb/issues/27937)
         - 修复前置检查中没有检查本地磁盘空间以及集群是否可用的问题 [#34213](https://github.com/pingcap/tidb/issues/34213)
         - 修复了 checksum 报错 “GC life time is shorter than transaction duration” [#32733](https://github.com/pingcap/tidb/issues/32733)

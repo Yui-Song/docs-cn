@@ -1,11 +1,15 @@
 ---
-title: PingCAP 维护的三方库
+title: TiDB 支持的第三方工具
 aliases: ['/zh/tidb/dev/supported-by-pingcap']
 ---
 
-# PingCAP 维护的三方库
+# TiDB 支持的第三方工具
 
-TiDB 对 MySQL 协议的支持，使得大部分适配 MySQL 的 Driver、ORM 及其他工具与 TiDB 兼容。本文主要介绍这些工具和它们的支持等级。
+> **注意：**
+>
+> 本文档仅列举了常见的 TiDB 支持的[第三方工具](https://en.wikipedia.org/wiki/Third-party_source)，未被列入其中的第三方工具并非代表不支持，但 PingCAP 无法了解其是否使用到 TiDB 不支持的特性，从而无法保证兼容性。
+
+TiDB [高度兼容 MySQL 协议](/mysql-compatibility.md)，使得大部分适配 MySQL 的 Driver、ORM 及其他工具与 TiDB 兼容。本文主要介绍这些工具和它们的支持等级。
 
 ## 支持等级
 
@@ -22,47 +26,166 @@ PingCAP 与开源社区合作，通过三方工具提供以下支持：
 
 ## Driver
 
-| 编程语言       | 驱动                                                                       | 最新已测试版本 | 支持等级 | TiDB 适配器                                                                                   | 教程                                                                             |
-|------------|--------------------------------------------------------------------------|---------|------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| C          | [MySQL Connector/C](https://downloads.mysql.com/archives/c-c/)           | 6.1.11  | Full | N/A                                                                                        | N/A                                                                            |
-| C#(.Net)   | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/)       | 8.0.28  | Compatible | N/A                                                                                        | N/A                                                                            |
-| C#(.Net)   | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/)     | 8.0.28  | Compatible | N/A                                                                                        | N/A                                                                            |
-| Go         | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)            | v1.6.0  | Full | N/A                                                                                        | [TiDB 和 Golang 的简单 CRUD 应用程序](/develop/dev-guide-sample-application-golang.md) |
-| Java       | [JDBC](https://dev.mysql.com/downloads/connector/j/)                     | 5.1.46；8.0.29  | Full | 5.1.46：N/A；8.0.29：[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0)                                                                                     | [TiDB 和 Java 的简单 CRUD 应用程序](/develop/dev-guide-sample-application-java.md)     |
-| JavaScript | [mysql](https://github.com/mysqljs/mysql)                                | v2.18.1 | Compatible | N/A                                                                                        | N/A                                                                            |
-| PHP        | [MySQL Connector/PHP](https://downloads.mysql.com/archives/c-php/)       | 5.0.37  | Compatible | N/A                                                                                        | N/A                                                                            |
-| Python     | [MySQL Connector/Python](https://downloads.mysql.com/archives/c-python/) | 8.0.28  | Compatible | N/A                                                                                        | N/A                                                                            |
+<table>
+   <thead>
+      <tr>
+         <th>编程语言</th>
+         <th>驱动</th>
+         <th>最新已测试版本</th>
+         <th>支持等级</th>
+         <th>TiDB 适配器</th>
+         <th>教程</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>Go</td>
+         <td><a href="https://github.com/go-sql-driver/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">Go-MySQL-Driver</a></td>
+         <td>v1.6.0</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-golang-sql-driver">使用 Go-MySQL-Driver 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td>Java</td>
+         <td><a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" referrerpolicy="no-referrer-when-downgrade">JDBC</a></td>
+         <td>8.0</td>
+         <td>Full</td>
+         <td>
+            <ul>
+               <li><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-choose-driver-or-orm#java-drivers" data-href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-choose-driver-or-orm#java-drivers">pingcap/mysql-connector-j</a></li>
+               <li><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-choose-driver-or-orm#tidb-loadbalance" data-href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-choose-driver-or-orm#tidb-loadbalance">pingcap/tidb-loadbalance</a></li>
+            </ul>
+         </td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-java-jdbc">使用 JDBC 连接到 TiDB</a></td>
+      </tr>
+   </tbody>
+</table>
 
 ## ORM
 
-| 编程语言                  | ORM 框架                                                                                                                                                                        | 最新已测试版本     | 支持等级 | TiDB 适配器                                               | 教程                                                                             |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|------|--------------------------------------------------------|--------------------------------------------------------------------------------|
-| Go                    | [gorm](https://github.com/go-gorm/gorm)                                                                                                                                       | v1.23.5     | Full | N/A                                                    | [TiDB 和 Golang 的简单 CRUD 应用程序](/develop/dev-guide-sample-application-golang.md) |
-| Go                    | [beego](https://github.com/beego/beego)                                                                                                                                       | v2.0.3      | Full | N/A                                                    | N/A                                                                            |
-| Go                    | [upper/db](https://github.com/upper/db)                                                                                                                                       | v4.5.2      | Full | N/A                                                    | N/A                                                                            |
-| Go                    | [xorm](https://gitea.com/xorm/xorm)                                                                                                                                           | v1.3.1      | Full | N/A                                                    | N/A                                                                            |
-| Java                  | [Hibernate](https://hibernate.org/orm/) | 6.1.0.Final | Full | N/A                                                    | [TiDB 和 Java 的简单 CRUD 应用程序](/develop/dev-guide-sample-application-java.md)     |
-| Java                  | [MyBatis](https://mybatis.org/mybatis-3/)                                                                                                                                     | v3.5.10     | Full | N/A                                                    | [TiDB 和 Java 的简单 CRUD 应用程序](/develop/dev-guide-sample-application-java.md) |
-| Java                  | [Spring Data JPA](https://spring.io/projects/spring-data-jpa/) | 2.7.2 | Full | N/A                                                    |   [使用 Spring Boot 构建 TiDB 应用程序](/develop/dev-guide-sample-application-spring-boot.md)   |
-| Java                  | [jOOQ](https://github.com/jOOQ/jOOQ)                                                                                                                                     | v3.16.7 (Open Source)     | Full | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [sequelize](https://www.npmjs.com/package/sequelize)                                                                                                                          | v6.20.1     | Compatible | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [Knex.js](https://knexjs.org/)                                                                                                                                                | v1.0.7      | Compatible | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [Prisma Client](https://www.prisma.io/)                                                                                                                                       | 3.15.1      | Compatible | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [TypeORM](https://www.npmjs.com/package/typeorm)                                                                                                                              | v0.3.6      | Compatible | N/A                                                    | N/A                                                                            |
-| PHP                   | [laravel](https://laravel.com/)                                                                                                                                               | v9.1.10     | Compatible | [laravel-tidb](https://github.com/colopl/laravel-tidb) | N/A                                                                            |
-| Python                | [Django](https://pypi.org/project/Django/)                                                  | v4.0.5      | Compatible | N/A                                                    | N/A                                                                            |
-| Python                | [peewee](https://github.com/coleifer/peewee/)                                                                                                                                 | v3.14.10    | Compatible | N/A                                                    | N/A                                                                            |
-| Python                | [PonyORM](https://ponyorm.org/)                                                                                                                                               | v0.7.16     | Compatible | N/A                                                    | N/A                                                                            |
-| Python                | [SQLAlchemy](https://www.sqlalchemy.org/)                                                                                                                                     | v1.4.37     | Compatible | N/A                                                    | N/A                                                                            |
+<table>
+   <thead>
+      <tr>
+         <th>编程语言</th>
+         <th>ORM 框架</th>
+         <th>最新已测试版本</th>
+         <th>支持等级</th>
+         <th>TiDB 适配器</th>
+         <th>教程</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td rowspan="4">Go</td>
+         <td><a href="https://github.com/go-gorm/gorm" target="_blank" referrerpolicy="no-referrer-when-downgrade">gorm</a></td>
+         <td>v1.23.5</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-golang-gorm">使用 GORM 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://github.com/beego/beego" target="_blank" referrerpolicy="no-referrer-when-downgrade">beego</a></td>
+         <td>v2.0.3</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td><a href="https://github.com/upper/db" target="_blank" referrerpolicy="no-referrer-when-downgrade">upper/db</a></td>
+         <td>v4.5.2</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td><a href="https://gitea.com/xorm/xorm" target="_blank" referrerpolicy="no-referrer-when-downgrade">xorm</a></td>
+         <td>v1.3.1</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td rowspan="4">Java</td>
+         <td><a href="https://hibernate.org/orm/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Hibernate</a></td>
+         <td>6.1.0.Final</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-java-hibernate">使用 Hibernate 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://mybatis.org/mybatis-3/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MyBatis</a></td>
+         <td>v3.5.10</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-java-mybatis">使用 MyBatis 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://spring.io/projects/spring-data-jpa/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Spring Data JPA</a></td>
+         <td>2.7.2</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-java-spring-boot">使用 Spring Boot 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://github.com/jOOQ/jOOQ" target="_blank" referrerpolicy="no-referrer-when-downgrade">jOOQ</a></td>
+         <td>v3.16.7 (Open Source)</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td>Ruby</td>
+         <td><a href="https://guides.rubyonrails.org/active_record_basics.html" target="_blank" referrerpolicy="no-referrer-when-downgrade">Active Record</a></td>
+         <td>v7.0</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-ruby-rails">使用 Rails 框架和 ActiveRecord ORM 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td rowspan="3">JavaScript / TypeScript</td>
+         <td><a href="https://sequelize.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Sequelize</a></td>
+         <td>v6.20.1</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td><a href="https://www.prisma.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Prisma</a></td>
+         <td>4.16.2</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-nodejs-prisma">使用 Prisma 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://typeorm.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">TypeORM</a></td>
+         <td>v0.3.17</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-nodejs-typeorm">使用 TypeORM 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td rowspan="2">Python</td>
+         <td><a href="https://pypi.org/project/Django/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Django</a></td>
+         <td>v4.2</td>
+         <td>Full</td>
+         <td><a href="https://github.com/pingcap/django-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">django-tidb</a></td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-python-django">使用 Django 连接到 TiDB</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
+         <td>v1.4.37</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="https://docs.pingcap.com/zh/tidb/dev/dev-guide-sample-application-python-sqlalchemy">使用 SQLAlchemy 连接到 TiDB</a></td>
+      </tr>
+   </tbody>
+</table>
 
 ## GUI
 
-| GUI                                           | 最新已测试版本  | 支持等级 | 教程  |
-|-----------------------------------------------|---------|------|-----|
-| [DBeaver](https://dbeaver.io/)                | 22.1.0  | Compatible | N/A |
-| [Navicat for MySQL](https://www.navicat.com/) | 16.0.14 | Compatible | N/A |
-
-| IDE                                              | 最新已测试版本 | 支持等级 | 教程 |
-| ------------------------------------------------ | ------- | ---- | ---- |
-| [DataGrip](https://www.jetbrains.com/datagrip/)  | N/A     | Compatible | N/A  |
-| [IntelliJ IDEA](https://www.jetbrains.com/idea/) | N/A     | Compatible | N/A  |
+| GUI                                                       | 最新已测试版本 | 支持等级 | 教程 |
+|-----------------------------------------------------------|-----------------------|---------------|-----|
+| [JetBrains DataGrip](https://www.jetbrains.com/datagrip/) | 2023.2.1              | Full          | N/A |
+| [DBeaver](https://dbeaver.io/)                            | 23.0.3                | Full          | N/A |
+| [Visual Studio Code](https://code.visualstudio.com/)      | 1.72.0                | Full          | N/A |
